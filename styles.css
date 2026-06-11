@@ -1,14 +1,20 @@
 :root {
-  --ink: #111827;
-  --navy: #081d35;
-  --blue: #123d6a;
-  --red: #c5222f;
-  --red-dark: #9f1622;
-  --cream: #f7f2e8;
-  --paper: #fffdf8;
-  --muted: #617083;
-  --line: rgba(8, 29, 53, 0.14);
-  --shadow: 0 24px 70px rgba(8, 29, 53, 0.18);
+  --obsidian: #10100f;
+  --charcoal: #1f2426;
+  --paper: #f4efe3;
+  --paper-deep: #e6dcc8;
+  --white: #fffaf0;
+  --red: #cf2035;
+  --red-dark: #97182a;
+  --steel: #496679;
+  --copper: #b56a3a;
+  --signal: #d7ef63;
+  --muted: #706c62;
+  --line-dark: rgba(255, 250, 240, 0.18);
+  --line-light: rgba(16, 16, 15, 0.14);
+  --shadow: 0 34px 90px rgba(16, 16, 15, 0.24);
+  --sans: "Avenir Next", "Trebuchet MS", sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
 }
 
 * {
@@ -21,9 +27,23 @@ html {
 
 body {
   margin: 0;
-  color: var(--ink);
+  color: var(--obsidian);
   background: var(--paper);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--serif);
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  content: "";
+  opacity: 0.08;
+  background-image:
+    linear-gradient(rgba(16, 16, 15, 0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 16, 15, 0.42) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mix-blend-mode: multiply;
 }
 
 img {
@@ -44,7 +64,7 @@ select {
 
 .site-header {
   position: fixed;
-  z-index: 20;
+  z-index: 30;
   top: 0;
   right: 0;
   left: 0;
@@ -52,9 +72,9 @@ select {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 28px;
-  padding: 18px clamp(18px, 4vw, 56px);
-  color: #fff;
-  background: linear-gradient(180deg, rgba(8, 29, 53, 0.86), rgba(8, 29, 53, 0));
+  padding: 16px clamp(18px, 4vw, 58px);
+  color: var(--white);
+  background: linear-gradient(180deg, rgba(16, 16, 15, 0.9), rgba(16, 16, 15, 0));
 }
 
 .brand {
@@ -63,109 +83,132 @@ select {
   gap: 12px;
 }
 
-.brand-mark {
+.brand-symbol {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(255, 250, 240, 0.35);
   background: var(--red);
+  font-family: var(--sans);
   font-weight: 900;
 }
 
-.brand strong,
-.brand small {
+.brand-text strong,
+.brand-text small {
   display: block;
   line-height: 1;
 }
 
-.brand strong {
-  font-size: 1.05rem;
+.brand-text strong {
+  font-size: 1.08rem;
 }
 
-.brand small {
-  margin-top: 4px;
-  color: rgba(255, 255, 255, 0.76);
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+.brand-text small {
+  margin-top: 5px;
+  color: rgba(255, 250, 240, 0.7);
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
 .primary-nav {
   justify-self: center;
   display: flex;
-  gap: 24px;
-  color: rgba(255, 255, 255, 0.82);
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
+  gap: 26px;
+  color: rgba(255, 250, 240, 0.78);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.header-action {
-  border: 1px solid rgba(255, 255, 255, 0.52);
-  padding: 12px 16px;
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
+.primary-nav a:hover {
+  color: var(--signal);
+}
+
+.nav-cta {
+  border: 1px solid rgba(255, 250, 240, 0.45);
+  padding: 13px 16px;
+  font-family: var(--sans);
+  font-size: 0.73rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .hero {
   position: relative;
-  min-height: 96vh;
+  min-height: 100svh;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+  grid-template-rows: 1fr auto;
+  gap: clamp(22px, 4vw, 58px);
   align-items: end;
-  gap: clamp(24px, 4vw, 64px);
-  padding: 150px clamp(18px, 5vw, 72px) 54px;
-  color: #fff;
   overflow: hidden;
+  padding: 132px clamp(18px, 5vw, 72px) 0;
+  color: var(--white);
+  background: var(--obsidian);
 }
 
-.hero-media,
-.hero-overlay {
+.hero-image,
+.hero-shade,
+.hero-grid {
   position: absolute;
   inset: 0;
 }
 
-.hero-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.hero-image {
+  background:
+    url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=2200&q=88")
+    center / cover;
+  filter: saturate(0.82) contrast(1.08);
+  transform: scale(1.02);
 }
 
-.hero-overlay {
+.hero-shade {
   background:
-    linear-gradient(90deg, rgba(8, 29, 53, 0.94), rgba(8, 29, 53, 0.65) 44%, rgba(8, 29, 53, 0.24)),
-    linear-gradient(0deg, rgba(8, 29, 53, 0.82), rgba(8, 29, 53, 0.04) 45%);
+    radial-gradient(circle at 76% 28%, rgba(215, 239, 99, 0.18), transparent 23%),
+    linear-gradient(90deg, rgba(16, 16, 15, 0.96), rgba(16, 16, 15, 0.76) 42%, rgba(16, 16, 15, 0.38)),
+    linear-gradient(0deg, rgba(16, 16, 15, 0.9), rgba(16, 16, 15, 0.14) 58%);
+}
+
+.hero-grid {
+  opacity: 0.24;
+  background-image:
+    linear-gradient(rgba(255, 250, 240, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 250, 240, 0.16) 1px, transparent 1px);
+  background-size: 78px 78px;
+  mask-image: linear-gradient(90deg, #000, transparent 78%);
 }
 
 .hero-content,
-.risk-panel {
+.briefing,
+.hero-index {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .hero-content {
-  max-width: 850px;
+  max-width: 960px;
+  padding-bottom: 58px;
 }
 
-.eyebrow,
-.panel-kicker {
-  margin: 0 0 14px;
+.eyebrow {
+  margin: 0 0 16px;
   color: var(--red);
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.78rem;
+  font-family: var(--sans);
+  font-size: 0.75rem;
   font-weight: 900;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .hero .eyebrow {
-  color: #ffb7bd;
+  color: var(--signal);
 }
 
 h1,
@@ -176,60 +219,58 @@ p {
 }
 
 h1 {
-  max-width: 760px;
-  margin-bottom: 24px;
-  font-size: clamp(4rem, 9vw, 8.8rem);
-  line-height: 0.88;
+  max-width: 980px;
+  margin-bottom: 26px;
+  font-size: clamp(5.3rem, 13.5vw, 14.5rem);
+  line-height: 0.74;
   letter-spacing: 0;
 }
 
 h2 {
-  font-size: clamp(2.3rem, 5vw, 5.4rem);
-  line-height: 0.96;
+  margin-bottom: 0;
+  font-size: clamp(2.6rem, 6vw, 7rem);
+  line-height: 0.88;
   letter-spacing: 0;
 }
 
 h3 {
-  font-size: clamp(1.35rem, 2.5vw, 2rem);
-  line-height: 1.04;
+  font-size: clamp(1.5rem, 2.6vw, 2.65rem);
+  line-height: 0.98;
+  letter-spacing: 0;
 }
 
 .hero-copy {
-  max-width: 650px;
-  color: rgba(255, 255, 255, 0.84);
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: clamp(1rem, 1.8vw, 1.28rem);
-  line-height: 1.6;
-}
-
-.hero-actions,
-.hero-proof {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+  max-width: 660px;
+  color: rgba(255, 250, 240, 0.78);
+  font-family: var(--sans);
+  font-size: clamp(1.02rem, 1.5vw, 1.28rem);
+  line-height: 1.55;
 }
 
 .hero-actions {
-  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
 }
 
 .button {
   display: inline-flex;
-  min-height: 48px;
+  min-height: 52px;
   align-items: center;
   justify-content: center;
-  padding: 14px 18px;
   border: 1px solid transparent;
+  padding: 15px 18px;
   cursor: pointer;
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.82rem;
+  font-family: var(--sans);
+  font-size: 0.76rem;
   font-weight: 900;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .button-primary {
-  color: #fff;
+  color: var(--white);
   background: var(--red);
 }
 
@@ -237,414 +278,569 @@ h3 {
   background: var(--red-dark);
 }
 
-.button-secondary {
-  border-color: rgba(255, 255, 255, 0.44);
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
+.button-ghost {
+  border-color: rgba(255, 250, 240, 0.34);
+  color: var(--white);
+  background: rgba(255, 250, 240, 0.07);
 }
 
-.hero-proof {
-  max-width: 660px;
-  margin: 42px 0 0;
-  padding: 0;
+.briefing {
+  align-self: center;
+  border: 1px solid var(--line-dark);
+  padding: 22px;
+  background:
+    linear-gradient(135deg, rgba(31, 36, 38, 0.92), rgba(31, 36, 38, 0.68)),
+    repeating-linear-gradient(0deg, rgba(255, 250, 240, 0.07), rgba(255, 250, 240, 0.07) 1px, transparent 1px, transparent 7px);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
 }
 
-.hero-proof div {
-  min-width: 140px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.32);
-}
-
-.hero-proof dt {
-  font-size: 2.2rem;
+.briefing-top,
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: rgba(255, 250, 240, 0.68);
+  font-family: var(--sans);
+  font-size: 0.68rem;
   font-weight: 900;
-}
-
-.hero-proof dd {
-  margin: 4px 0 0;
-  color: rgba(255, 255, 255, 0.72);
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
-.risk-panel {
-  align-self: center;
-  padding: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  background: rgba(6, 20, 38, 0.72);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
+.briefing-top strong,
+.console-header b {
+  color: var(--signal);
 }
 
-.risk-panel h2 {
-  margin-bottom: 22px;
-  font-size: 1.8rem;
+.briefing-score {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 34px 0 28px;
+  border-bottom: 1px solid var(--line-dark);
+  padding-bottom: 18px;
 }
 
-.risk-meter {
-  height: 10px;
-  margin-bottom: 22px;
-  background: rgba(255, 255, 255, 0.14);
-}
-
-.risk-meter span {
-  display: block;
-  width: var(--risk-level);
-  height: 100%;
-  background: linear-gradient(90deg, #f7d778, var(--red));
-}
-
-.risk-panel ul {
-  display: grid;
-  gap: 14px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  color: rgba(255, 255, 255, 0.82);
-  font-family: "Trebuchet MS", sans-serif;
-  line-height: 1.45;
-}
-
-.solution-strip {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-bottom: 1px solid var(--line);
-  background: var(--cream);
-}
-
-.solution-strip a {
-  min-height: 210px;
-  padding: clamp(24px, 4vw, 44px);
-  border-right: 1px solid var(--line);
-}
-
-.solution-strip a:hover {
-  background: #fff;
-}
-
-.solution-strip span {
-  color: var(--red);
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.74rem;
+.briefing-score span {
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 6rem;
   font-weight: 900;
+  line-height: 0.76;
+}
+
+.briefing-score small {
+  max-width: 84px;
+  color: rgba(255, 250, 240, 0.62);
+  font-family: var(--sans);
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.briefing-lines {
+  display: grid;
+  gap: 13px;
+}
+
+.briefing-lines p {
+  margin: 0;
+  color: rgba(255, 250, 240, 0.72);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.briefing-lines b {
+  color: var(--white);
+}
+
+.hero-index {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line-dark);
+  background: rgba(16, 16, 15, 0.64);
+  backdrop-filter: blur(14px);
+}
+
+.hero-index a {
+  min-height: 106px;
+  padding: 24px;
+  border-right: 1px solid var(--line-dark);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 900;
+}
+
+.hero-index span {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--signal);
+  font-size: 0.7rem;
   letter-spacing: 0.14em;
 }
 
-.solution-strip strong,
-.solution-strip small {
-  display: block;
+.ticker {
+  display: flex;
+  gap: 0;
+  overflow: hidden;
+  border-block: 1px solid var(--line-light);
+  background: var(--red);
+  color: var(--white);
 }
 
-.solution-strip strong {
-  margin: 44px 0 12px;
-  font-size: clamp(1.45rem, 2.2vw, 2.1rem);
+.ticker span {
+  flex: 1 0 auto;
+  min-width: 210px;
+  padding: 15px 24px;
+  border-right: 1px solid rgba(255, 250, 240, 0.24);
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.split-section,
+.industry-lab,
+.method,
+.control-room,
+.people-section,
+.contact {
+  padding: clamp(72px, 10vw, 132px) clamp(18px, 5vw, 72px);
+}
+
+.split-section {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: start;
+  background: var(--paper);
+}
+
+.section-marker {
+  display: grid;
+  gap: 18px;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.section-marker b {
+  color: var(--red);
+  font-size: 2.6rem;
   line-height: 1;
 }
 
-.solution-strip small {
-  max-width: 340px;
-  color: var(--muted);
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.45;
+.split-copy h2,
+.lab-heading h2,
+.method-copy h2,
+.control-copy h2,
+.people-copy h2,
+.contact-copy h2 {
+  color: var(--obsidian);
 }
 
-.section,
-.advantage,
-.consultation {
-  padding: clamp(70px, 10vw, 132px) clamp(18px, 5vw, 72px);
-}
-
-.section-heading {
+.solution-stack {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
-  gap: 40px;
-  align-items: end;
-  margin-bottom: 44px;
+  gap: 1px;
+  background: var(--line-light);
 }
 
-.section-heading h2,
-.advantage-intro h2,
-.command-copy h2,
-.team-band h2,
-.consultation h2 {
-  margin-bottom: 0;
-  color: var(--navy);
+.solution-stack article {
+  min-height: 200px;
+  padding: clamp(24px, 4vw, 42px);
+  background: var(--white);
 }
 
-.section-heading p:last-child,
-.advantage-intro p,
-.command-copy p,
-.team-band p {
+.solution-stack span,
+.profile-stamp {
+  color: var(--red);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.solution-stack p,
+.lab-heading p,
+.profile-copy p,
+.method-rail p,
+.control-copy p,
+.people-copy p,
+.contact-copy p {
   color: var(--muted);
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.65;
+  font-family: var(--sans);
+  line-height: 1.62;
 }
 
-.industry-layout {
+.industry-lab {
+  background: var(--obsidian);
+  color: var(--white);
+}
+
+.lab-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.48fr);
+  gap: 36px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+
+.lab-heading h2,
+.method h2,
+.control-room h2 {
+  color: var(--white);
+}
+
+.lab-heading p {
+  color: rgba(255, 250, 240, 0.66);
+}
+
+.lab-shell {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
-  gap: 24px;
+  gap: 1px;
+  background: var(--line-dark);
+  box-shadow: var(--shadow);
 }
 
 .industry-tabs {
   display: grid;
-  align-content: start;
-  border-top: 1px solid var(--line);
+  align-content: stretch;
+  background: #171717;
 }
 
 .industry-tab {
-  min-height: 72px;
+  min-height: 116px;
   border: 0;
-  border-bottom: 1px solid var(--line);
-  color: var(--muted);
+  border-bottom: 1px solid var(--line-dark);
+  padding: 24px;
+  color: rgba(255, 250, 240, 0.58);
   background: transparent;
   cursor: pointer;
   text-align: left;
-  font-family: "Trebuchet MS", sans-serif;
+  font-family: var(--sans);
   font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.industry-tab span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--steel);
 }
 
 .industry-tab.is-active {
-  color: var(--red);
+  color: var(--white);
+  background: var(--red);
 }
 
-.industry-card {
+.industry-tab.is-active span {
+  color: var(--white);
+}
+
+.industry-profile {
   display: grid;
-  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1fr);
-  min-height: 480px;
-  background: var(--navy);
-  color: #fff;
-  box-shadow: var(--shadow);
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+  min-height: 620px;
+  background: #171717;
 }
 
-.industry-card img {
+.profile-image-wrap {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.profile-image-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: saturate(0.82) contrast(1.05);
 }
 
-.industry-card-content {
+.profile-stamp {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  border: 1px solid rgba(255, 250, 240, 0.26);
+  padding: 12px 14px;
+  color: var(--white);
+  background: rgba(16, 16, 15, 0.72);
+  backdrop-filter: blur(12px);
+}
+
+.profile-copy {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(26px, 5vw, 56px);
+  padding: clamp(26px, 5vw, 62px);
 }
 
-.industry-card-content h3 {
-  max-width: 560px;
+.profile-copy h3 {
+  max-width: 680px;
+  color: var(--white);
 }
 
-.industry-card-content p:not(.panel-kicker) {
-  color: rgba(255, 255, 255, 0.76);
-  font-family: "Trebuchet MS", sans-serif;
-  line-height: 1.6;
+.profile-copy p {
+  max-width: 620px;
+  color: rgba(255, 250, 240, 0.68);
+}
+
+.profile-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 24px 0;
+  background: var(--line-dark);
+}
+
+.profile-metrics div {
+  padding: 18px;
+  background: #202020;
+}
+
+.profile-metrics span,
+.profile-metrics strong {
+  display: block;
+  font-family: var(--sans);
+}
+
+.profile-metrics span {
+  color: var(--signal);
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+.profile-metrics strong {
+  margin-top: 6px;
+  color: rgba(255, 250, 240, 0.62);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .industry-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 20px;
 }
 
 .industry-tags span {
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  padding: 8px 10px;
-  color: rgba(255, 255, 255, 0.84);
-  font-family: "Trebuchet MS", sans-serif;
+  border: 1px solid var(--line-dark);
+  padding: 9px 11px;
+  color: rgba(255, 250, 240, 0.74);
+  font-family: var(--sans);
   font-size: 0.78rem;
 }
 
-.advantage {
+.method {
   display: grid;
-  grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.3fr);
-  gap: clamp(34px, 6vw, 80px);
-  background: var(--navy);
-  color: #fff;
+  grid-template-columns: minmax(280px, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(34px, 6vw, 86px);
+  background:
+    linear-gradient(90deg, rgba(16, 16, 15, 0.94), rgba(16, 16, 15, 0.74)),
+    url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=88")
+    center / cover;
+  color: var(--white);
 }
 
-.advantage-intro {
+.method-copy {
   position: sticky;
-  top: 120px;
+  top: 118px;
   align-self: start;
 }
 
-.advantage-intro h2 {
-  color: #fff;
-}
-
-.process-grid {
+.method-rail {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(255, 255, 255, 0.14);
+  gap: 0;
+  border-top: 1px solid var(--line-dark);
 }
 
-.process-grid article {
-  min-height: 260px;
-  padding: clamp(22px, 3vw, 34px);
-  background: #0b2948;
+.method-rail article {
+  display: grid;
+  grid-template-columns: 90px minmax(170px, 0.5fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line-dark);
+  padding: 28px 0;
 }
 
-.process-grid article:last-child {
-  grid-column: 1 / -1;
-}
-
-.process-grid span {
-  color: #ffb7bd;
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.76rem;
+.method-rail span {
+  color: var(--signal);
+  font-family: var(--sans);
   font-weight: 900;
 }
 
-.process-grid p {
-  color: rgba(255, 255, 255, 0.72);
-  font-family: "Trebuchet MS", sans-serif;
-  line-height: 1.6;
+.method-rail h3 {
+  margin: 0;
+  color: var(--white);
 }
 
-.command-section {
+.method-rail p {
+  margin: 0;
+  color: rgba(255, 250, 240, 0.68);
+}
+
+.control-room {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(340px, 1.15fr);
-  gap: clamp(34px, 6vw, 80px);
+  grid-template-columns: minmax(0, 0.78fr) minmax(340px, 1.1fr);
+  gap: clamp(34px, 6vw, 86px);
   align-items: center;
-  background: var(--cream);
+  background: var(--charcoal);
+  color: var(--white);
 }
 
-.command-board {
-  padding: clamp(22px, 4vw, 42px);
-  background: #fff;
+.control-copy p {
+  color: rgba(255, 250, 240, 0.68);
+}
+
+.console {
+  border: 1px solid var(--line-dark);
+  background:
+    linear-gradient(135deg, rgba(255, 250, 240, 0.08), rgba(255, 250, 240, 0.03)),
+    #151819;
   box-shadow: var(--shadow);
 }
 
-.board-topline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 26px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--line);
-  font-family: "Trebuchet MS", sans-serif;
-  text-transform: uppercase;
+.console-header {
+  border-bottom: 1px solid var(--line-dark);
+  padding: 18px 20px;
 }
 
-.board-topline span {
-  color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-}
-
-.board-grid {
+.console-main {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(180px, 0.85fr) minmax(220px, 1fr);
+  gap: 28px;
+  padding: clamp(24px, 4vw, 44px);
+}
+
+.console-chart {
+  display: flex;
+  min-height: 300px;
+  align-items: end;
+  gap: 12px;
+  border-left: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+  padding: 18px;
+}
+
+.console-chart span {
+  flex: 1;
+  min-width: 18px;
+  background: linear-gradient(180deg, var(--signal), var(--red));
+}
+
+.console-list {
+  display: grid;
+  align-content: center;
   gap: 14px;
 }
 
-.board-grid div {
-  min-height: 154px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  background: #fbfaf6;
+.console-list p {
+  margin: 0;
+  border: 1px solid var(--line-dark);
+  padding: 17px;
+  color: rgba(255, 250, 240, 0.72);
+  font-family: var(--sans);
 }
 
-.board-grid strong,
-.board-grid small {
-  display: block;
-  font-family: "Trebuchet MS", sans-serif;
-}
-
-.board-grid strong {
-  margin: 26px 0 8px;
-}
-
-.board-grid small {
-  color: var(--muted);
-}
-
-.status-dot {
-  display: block;
-  width: 12px;
-  height: 12px;
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
   border-radius: 50%;
 }
 
-.good {
-  background: #288c63;
+.green {
+  background: #46bf85;
 }
 
-.watch {
-  background: #d49b24;
+.amber {
+  background: #d9a441;
 }
 
-.alert {
+.red {
   background: var(--red);
 }
 
-.team-band {
+.people-section {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.7fr);
-  gap: clamp(28px, 5vw, 70px);
+  grid-template-columns: minmax(300px, 0.92fr) minmax(0, 0.84fr);
+  gap: clamp(32px, 6vw, 84px);
   align-items: center;
-  padding: clamp(70px, 10vw, 118px) clamp(18px, 5vw, 72px);
-  color: #fff;
+  background: var(--paper);
+}
+
+.people-image {
+  min-height: 560px;
   background:
-    linear-gradient(90deg, rgba(8, 29, 53, 0.94), rgba(8, 29, 53, 0.6)),
-    url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1800&q=85") center / cover;
+    linear-gradient(0deg, rgba(16, 16, 15, 0.2), rgba(16, 16, 15, 0.02)),
+    url("https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1500&q=88")
+    center / cover;
+  box-shadow: var(--shadow);
 }
 
-.team-band h2 {
-  color: #fff;
+.people-copy {
+  max-width: 680px;
 }
 
-.team-band p {
-  color: rgba(255, 255, 255, 0.78);
-}
-
-.consultation {
+.contact {
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(320px, 0.72fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.68fr);
   gap: clamp(32px, 6vw, 88px);
-  background: #fff;
+  align-items: start;
+  background: var(--white);
 }
 
-.consultation-form {
+.contact-copy p {
+  max-width: 560px;
+}
+
+.contact-form {
   display: grid;
   gap: 16px;
+  border-top: 4px solid var(--red);
+  padding-top: 22px;
 }
 
-.consultation-form label {
+.contact-form label {
   display: grid;
   gap: 8px;
   color: var(--muted);
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.78rem;
+  font-family: var(--sans);
+  font-size: 0.72rem;
   font-weight: 900;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.consultation-form input,
-.consultation-form select {
+.contact-form input,
+.contact-form select {
   width: 100%;
-  min-height: 52px;
-  border: 1px solid var(--line);
+  min-height: 54px;
+  border: 1px solid var(--line-light);
   border-radius: 0;
   padding: 0 14px;
-  color: var(--ink);
-  background: #fbfaf6;
-  font-family: "Trebuchet MS", sans-serif;
+  color: var(--obsidian);
+  background: var(--paper);
+  font-family: var(--sans);
   font-size: 1rem;
   letter-spacing: 0;
   text-transform: none;
 }
 
-.consultation-form .button {
+.contact-form .button {
   width: 100%;
 }
 
@@ -652,17 +848,18 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   padding: 26px clamp(18px, 5vw, 72px);
-  color: rgba(255, 255, 255, 0.66);
-  background: #061426;
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 0.84rem;
+  color: rgba(255, 250, 240, 0.66);
+  background: var(--obsidian);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1050px) {
   .site-header {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto auto;
   }
 
   .primary-nav {
@@ -670,63 +867,96 @@ h3 {
   }
 
   .hero,
-  .section-heading,
-  .industry-layout,
-  .industry-card,
-  .advantage,
-  .command-section,
-  .team-band,
-  .consultation {
+  .split-section,
+  .lab-heading,
+  .lab-shell,
+  .industry-profile,
+  .method,
+  .control-room,
+  .people-section,
+  .contact {
     grid-template-columns: 1fr;
   }
 
-  .hero {
-    min-height: auto;
+  .hero-content {
+    padding-bottom: 0;
   }
 
-  .risk-panel {
+  .briefing {
     align-self: auto;
   }
 
-  .solution-strip,
-  .board-grid,
-  .process-grid {
-    grid-template-columns: 1fr;
+  .hero-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 28px;
   }
 
-  .process-grid article:last-child {
-    grid-column: auto;
+  .section-marker {
+    grid-template-columns: auto auto;
+    justify-content: start;
+    align-items: end;
   }
 
-  .industry-card img {
-    height: 320px;
-  }
-
-  .advantage-intro {
+  .method-copy {
     position: static;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 680px) {
   .site-header {
     position: absolute;
-    padding-top: 14px;
+    padding-top: 12px;
   }
 
-  .header-action {
+  .nav-cta {
     display: none;
   }
 
+  .brand-symbol {
+    width: 40px;
+    height: 40px;
+  }
+
   .hero {
-    padding-top: 120px;
+    min-height: auto;
+    padding-top: 112px;
+  }
+
+  .hero-image {
+    transform: none;
+  }
+
+  .hero-content,
+  .briefing {
+    min-width: 0;
   }
 
   h1 {
-    font-size: clamp(3.45rem, 18vw, 5.2rem);
+    font-size: clamp(3.5rem, 17vw, 4.4rem);
+    line-height: 0.82;
   }
 
-  .solution-strip a {
-    min-height: 168px;
+  h2 {
+    font-size: clamp(2.35rem, 14vw, 4.2rem);
+  }
+
+  .hero-index,
+  .profile-metrics,
+  .console-main {
+    grid-template-columns: 1fr;
+  }
+
+  .ticker {
+    flex-wrap: wrap;
+  }
+
+  .ticker span {
+    min-width: 50%;
+  }
+
+  .hero-index a {
+    min-height: 84px;
+    padding: 18px;
   }
 
   .industry-tabs {
@@ -734,16 +964,22 @@ h3 {
   }
 
   .industry-tab {
-    padding-right: 10px;
-    font-size: 0.86rem;
+    min-height: 92px;
+    padding: 16px;
+    font-size: 0.72rem;
   }
 
-  .team-band {
-    gap: 18px;
-    background-position: 58% center;
+  .profile-image-wrap,
+  .people-image {
+    min-height: 330px;
   }
 
-  .team-band p {
-    max-width: 31rem;
+  .method-rail article {
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
+  }
+
+  .method-rail p {
+    grid-column: 2;
   }
 }
