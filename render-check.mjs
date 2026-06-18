@@ -7,16 +7,17 @@ const require = createRequire(
 const { chromium } = require("playwright");
 
 const browser = await chromium.launch({ headless: true });
+const localUrl = `http://127.0.0.1:${process.env.RENDER_PORT || "8000"}`;
 const page = await browser.newPage({
   viewport: { width: 1440, height: 1200 },
   deviceScaleFactor: 1,
 });
 
-await page.goto("http://127.0.0.1:8000", { waitUntil: "networkidle" });
+await page.goto(localUrl, { waitUntil: "networkidle" });
 await page.screenshot({ path: "liberty-desktop.png", fullPage: true });
 
 await page.setViewportSize({ width: 390, height: 1200 });
-await page.goto("http://127.0.0.1:8000", { waitUntil: "networkidle" });
+await page.goto(localUrl, { waitUntil: "networkidle" });
 await page.screenshot({ path: "liberty-mobile.png", fullPage: true });
 
 const audit = await page.evaluate(() => {
